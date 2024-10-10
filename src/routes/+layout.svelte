@@ -1,44 +1,30 @@
-<script>
+<script lang="ts">
 	import '../app.css';
 	import { supabase } from '$lib/supabaseClient';
 	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
-
-	const user = writable(null);
+	import { authStore } from '$lib/authStore';
 
 	onMount(() => {
-		supabase.auth.getSession().then(({ data: { session } }) => {
-			user.set(session?.user ?? null);
-		});
+		authStore.check();
 
 		const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-			user.set(session?.user ?? null);
+			authStore.setUser(session?.user ?? null);
 		});
 
 		return () => subscription.unsubscribe();
 	});
-
-	function signIn() {
-		supabase.auth.signInWithOAuth({
-			provider: 'google'
-		});
-	}
-
-	function signOut() {
-		supabase.auth.signOut();
-	}
 </script>
 
 <div class="navbar bg-base-100">
 	<div class="flex-1">
-		<a class="btn btn-ghost text-xl">Secret Santa</a>
+		<a href="/" class="btn btn-ghost text-xl">Secret Santa</a>
 	</div>
 	<div class="space-x-4">
-		{#if $user}
-			<span>Willkommen, {$user.email}</span>
-			<button class="btn" on:click={signOut}>Logout</button>
+		{#if $authStore}
+			<span>Willkommen, {$authStore.email}</span>
+			<button class="btn" on:click={authStore.signOut}>Logout</button>
 		{:else}
-			<button class="btn" on:click={signIn}>Login</button>
+			<button class="btn" on:click={authStore.signIn}>Login</button>
 		{/if}
 	</div>
 </div>
