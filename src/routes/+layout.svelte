@@ -7,7 +7,9 @@
 	onMount(() => {
 		authStore.check();
 
-		const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+		const {
+			data: { subscription }
+		} = supabase.auth.onAuthStateChange((_event, session) => {
 			authStore.setUser(session?.user ?? null);
 		});
 
@@ -29,6 +31,6 @@
 	</div>
 </div>
 
-<div class="px-8 py-16">
+<div class="p-8 container mx-auto">
 	<slot />
 </div>
