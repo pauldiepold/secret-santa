@@ -8,7 +8,12 @@ function createAuthStore() {
 
 	return {
 		subscribe,
-		signIn: () => supabase.auth.signInWithOAuth({ provider: 'google' }),
+		signIn: () => supabase.auth.signInWithOAuth({
+			provider: 'google',
+			options: {
+				redirectTo: import.meta.env.VERCEL === '1' ? import.meta.env.VERCEL_URL : 'http://localhost:5173'
+			}
+		}),
 		signOut: async () => {
 			await supabase.auth.signOut();
 			set(null);
