@@ -4,9 +4,11 @@ import { supabase } from '$lib/supabaseClient';
 import { goto } from '$app/navigation';
 
 const REDIRECT_URL =
-	import.meta.env.VITE_VERCEL === '1' ? import.meta.env.VITE_VERCEL_URL : 'http://localhost:5173';
+	import.meta.env.VITE_VERCEL == 1 ? import.meta.env.VITE_VERCEL_URL : 'http://localhost:5173';
 
 console.log(REDIRECT_URL);
+console.log(import.meta.env.VITE_VERCEL);
+console.log(import.meta.env.VITE_VERCEL_URL);
 
 function createAuthStore() {
 	const { subscribe, set } = writable<User | null>(null);
