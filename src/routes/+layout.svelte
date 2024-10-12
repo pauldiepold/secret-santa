@@ -10,7 +10,9 @@
 			userStore.set(session?.user ?? null);
 		});
 
-		const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+		const {
+			data: { subscription }
+		} = supabase.auth.onAuthStateChange((_event, session) => {
 			userStore.set(session?.user ?? null);
 		});
 
@@ -21,14 +23,14 @@
 		supabase.auth.signInWithOAuth({
 			provider: 'google',
 			options: {
-				redirectTo: window.location.origin,
+				redirectTo: window.location.origin
 			}
 		});
 	}
 
 	function signOut() {
 		supabase.auth.signOut();
-		userStore.set(null)
+		userStore.set(null);
 		goto('/');
 	}
 </script>

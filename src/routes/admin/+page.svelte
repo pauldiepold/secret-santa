@@ -1,8 +1,7 @@
 <script lang="ts">
-	import AuthGuard from '$lib/authGuard.svelte';
+	import { requireAuth } from '$lib/authGuard';
+
+	requireAuth();
 </script>
 
-<AuthGuard>
-	<h1>Admin</h1>
-	<!-- Hier kommt der geschützte Inhalt -->
-</AuthGuard>
+<h1>Admin</h1>
