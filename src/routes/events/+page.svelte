@@ -1,5 +1,7 @@
 <script>
-	import AuthGuard from '$lib/authGuard.svelte';
+	import { requireAuth } from '$lib/authGuard';
+
+	requireAuth();
 
 	export let data;
 </script>
@@ -18,7 +20,7 @@
 <ul>
 	{#each data.events as event}
 		<li class="list-disc list-inside ml-6">
-			<a href="/events/{event.id}" class="underline ">
+			<a href="/events/{event.id}" class="underline">
 				{event.name}
 			</a>
 		</li>

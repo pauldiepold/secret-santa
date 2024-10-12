@@ -1,6 +1,9 @@
 <script>
 	import { supabase } from '$lib/supabaseClient';
 	import { goto } from '$app/navigation';
+	import { requireAuth } from '$lib/authGuard';
+
+	requireAuth();
 
 	let name = '';
 	let description = '';
@@ -25,30 +28,36 @@
 </div>
 
 <form on:submit|preventDefault={createEvent} class="flex flex-col space-y-8 items-start">
-
 	<label class="form-control w-full max-w-xs">
 		<div class="label">
 			<span class="label-text">Name der Veranstaltung:</span>
 		</div>
-		<input type="text" bind:value={name} required placeholder="Bitte eingeben..."
-					 class="input input-bordered w-full max-w-xs" />
+		<input
+			type="text"
+			bind:value={name}
+			required
+			placeholder="Bitte eingeben..."
+			class="input input-bordered w-full max-w-xs"
+		/>
 	</label>
 
 	<label class="form-control w-full max-w-xs">
 		<div class="label">
 			<span class="label-text">Beschreibung:</span>
 		</div>
-		<textarea type="text" bind:value={description} required placeholder="Bitte eingeben..."
-					 class="textarea textarea-bordered h-24" />
+		<textarea
+			bind:value={description}
+			required
+			placeholder="Bitte eingeben..."
+			class="textarea textarea-bordered h-24"
+		/>
 	</label>
-
 
 	<label class="form-control w-full max-w-xs">
 		<div class="label">
 			<span class="label-text">Datum der Veranstaltung:</span>
 		</div>
-		<input type="date" bind:value={date} required
-					 class="input input-bordered w-full max-w-xs" />
+		<input type="date" bind:value={date} required class="input input-bordered w-full max-w-xs" />
 	</label>
 
 	<button class="btn btn-primary" type="submit">Event erstellen</button>
