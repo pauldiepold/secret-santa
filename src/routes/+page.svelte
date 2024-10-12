@@ -1,9 +1,4 @@
-<script>
-	export let data;
-</script>
 
-<ul>
-	{#each data.countries as country}
-		<li>{country.name}</li>
-	{/each}
-</ul>
+<a class="btn btn-primary" href="/events">
+	<button>Veranstaltungen ansehen</button>
+</a>
