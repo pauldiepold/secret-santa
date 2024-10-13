@@ -1,9 +1,14 @@
 import { supabase } from '$lib/supabaseClient';
+import type { Tables } from '$lib/database.types';
+import type { PageServerLoad } from './$types';
 
-export async function load({ params }) {
-	const { data } = await supabase.from('events').select().eq('id', params.id).single();
+export const load: PageServerLoad = async ({ params }) => {
+	const { data, error } = await supabase.from('events').select().eq('id', params.id).single();
 
-	return {
-		event: data
-	};
-}
+	if (error) {
+		console.error('Error fetching event:', error);
+		return { event: null };
+	}
+
+	return { event: data as Tables<'events'> };
+};

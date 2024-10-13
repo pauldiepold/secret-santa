@@ -1,11 +1,23 @@
-# secret-santa
+# Secret Santa
 
-secret-santa
+Applikation zum Zulosen von Wichteln.
 
-## Vercel - Supabase Integration
+## Supabase lokal starten
 
-https://supabase.com/partners/integrations/vercel
+```
+supabase start
+supabase stop
+```
 
-`npx vercel login`
-`npx vercel link`
-`npx vercel env pull`
+### Types automatisch erstellen
+
+```
+npx supabase gen types --lang=typescript --local > src/lib/database.types.ts
+```
+
+### Neue Migration erstellen
+
+```
+supabase migration new create_table_name
+supbase reset
+```
