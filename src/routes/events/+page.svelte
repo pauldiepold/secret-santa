@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { requireAuth } from '$lib/authGuard';
 
 	requireAuth();

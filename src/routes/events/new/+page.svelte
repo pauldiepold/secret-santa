@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { supabase } from '$lib/supabaseClient';
 	import { goto } from '$app/navigation';
 	import { requireAuth } from '$lib/authGuard';
